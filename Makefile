@@ -310,6 +310,7 @@ HOSTCXX      = g++
 endif
 HOSTCFLAGS   := -Wall -Wmissing-prototypes -Wstrict-prototypes -Ofast -fomit-frame-pointer -std=gnu89 -pipe -fforce-addr 
 HOSTCXXFLAGS = -Ofast
+HOSTLDFLAGS  += $(HOST_LFS_LDFLAGS)
 
 ifeq ($(shell $(HOSTCC) -v 2>&1 | grep -c "clang version"), 1)
 HOSTCFLAGS  += -Wno-unused-value -Wno-unused-parameter \
@@ -412,7 +413,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -pipe \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
 		   -Wno-unused-function\
-		   -ffast-math -mcpu=cortex-a55 -mtune=cortex-a55 \
+		   -ffast-math -mtune=cortex-a55 \
 		   -std=gnu89 \
 		   -mllvm -polly \
 		   -mllvm -polly-run-dce \
@@ -788,7 +789,7 @@ else
 KBUILD_CFLAGS   += -O3
 endif
 
-KBUILD_CFLAGS	+= -O3 -mtune=cortex-a55 -mcpu=cortex-a55+crc+crypto+fp16+simd+sve \
+KBUILD_CFLAGS	+= -O3 -mtune=cortex-a55 \
 -fomit-frame-pointer -pipe \
 -funroll-loops \
 -ftree-vectorize \
